@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec = "http://www.thymeleaf.org/extras/spring-security"
+>
    <head>
       <!-- basic -->
       <meta charset="utf-8">
@@ -8,7 +11,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>cla</title>
+      <title>FreeAPK</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -19,7 +22,7 @@
       <!-- Responsive-->
       <link rel="stylesheet" href="css/responsive.css">
       <!-- fevicon -->
-      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <link rel="icon" href="images/apk_page.png">
       <!-- Scrollbar Custom CSS -->
       <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
@@ -46,7 +49,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                              <a href="/"><img src="images/apk_page.png" alt="#" style="max-height: 75px; max-width: 75px" /></a>
                            </div>
                         </div>
                      </div>
@@ -92,6 +95,26 @@
       </header>
       <!-- end header inner -->
       <!-- end header -->
+
+
+
+                        <!--<div id="project" class="project">
+    <div class="container">
+        <div class="row">
+            <div  class="product_main">
+                <div th:each="item : ${products}" class="project_box ">
+                    <div class="dark_white_bg">
+                        <a th:href="@{products/{productId}(productId=${item.id})}">
+                            <img th:src="@{${item.imagePath}}" alt="#" style="width:150px;">
+                        </a>
+                    </div>
+                    <h3 th:text="${item.name +'   $' + item.price}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+
       <!-- products -->
       <div  class="products">
          <div class="container">
@@ -106,62 +129,20 @@
                <div class="col-md-12">
                   <div class="our_products">
                      <div class="row">
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product1.png" alt="#"/></figure>
-                              <h3>Computer</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product2.png" alt="#"/></figure>
-                              <h3>Laptop</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product3.png" alt="#"/></figure>
-                              <h3>Tablet</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product4.png" alt="#"/></figure>
-                              <h3>Speakers</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product5.png" alt="#"/></figure>
-                              <h3>internet</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4 margin_bottom1">
-                           <div class="product_box">
-                              <figure><img src="images/product6.png" alt="#"/></figure>
-                              <h3>Hardisk</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="product_box">
-                              <figure><img src="images/product7.png" alt="#"/></figure>
-                              <h3>Rams</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="product_box">
-                              <figure><img src="images/product8.png" alt="#"/></figure>
-                              <h3>Bettery</h3>
-                           </div>
-                        </div>
-                        <div class="col-md-4">
-                           <div class="product_box">
-                              <figure><img src="images/product9.png" alt="#"/></figure>
-                              <h3>Drive</h3>
-                           </div>
-                        </div>
+
+                        <!---->
+                         <div  th:each="item : ${productList}" class="col-md-4 margin_bottom1">
+                             <div  class="product_box">
+                                 <a th:href="@{productPage/{productId}(productId=${item.id})}">
+                                     <img th:src="@{${item.logoPath}}" alt="#" style="max-height: 100px; max-width: 100px"/>
+                                 </a>
+                                 <h3 th:text="${item.name +'   $' + item.price}"/>
+                             </div>
+                         </div>
+                        <!---->
+
                         <div class="col-md-12">
-                           <a class="read_more" href="#">See More</a>
+                           <a class="read_more" href="#">Scroll up</a>
                         </div>
                      </div>
                   </div>
@@ -170,13 +151,14 @@
          </div>
       </div>
       <!-- end products -->
+
       <!--  footer -->
       <footer>
          <div class="footer">
             <div class="container">
                <div class="row">
                   <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                     <img class="logo1" src="images/logo1.png" alt="#"/>
+                     <img class="logo1" src="images/apk_page.png" alt="#" style="max-height: 75px; max-width: 75px"/>
                      <ul class="social_icon">
                         <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -209,7 +191,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-12">
-                        <p>© 2019 All Rights Reserved. Design by<a href="https://html.design/"> Free Html Templates</a></p>
+                        <p>© 2022 All Rights Reserved</p>
                      </div>
                   </div>
                </div>
