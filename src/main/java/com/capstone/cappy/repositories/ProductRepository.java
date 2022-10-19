@@ -1,6 +1,6 @@
 package com.capstone.cappy.repositories;
 
-import com.capstone.cappy.models.Product;
+import com.capstone.cappy.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

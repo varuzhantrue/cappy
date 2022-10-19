@@ -1,6 +1,6 @@
 package com.capstone.cappy.auth;
 
-import com.capstone.cappy.models.User;
+import com.capstone.cappy.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

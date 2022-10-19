@@ -1,6 +1,7 @@
 package com.capstone.cappy.controllers;
 
-import com.capstone.cappy.models.User;
+import com.capstone.cappy.entities.User;
+import com.capstone.cappy.entities.UserDto;
 import com.capstone.cappy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,7 +29,7 @@ public class UserApiController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")//?
-    public void registerUser(@RequestBody User user) {
+    public void registerUser(@RequestBody UserDto user) {
         userService.registerUser(user);
     }
 

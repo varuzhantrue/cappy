@@ -1,6 +1,6 @@
 package com.capstone.cappy.service;
 
-import com.capstone.cappy.models.History;
+import com.capstone.cappy.entities.History;
 import com.capstone.cappy.repositories.HistoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,6 @@ public class HistoryService {
     }
 
     public List<History> getAllForUser(long id) {
-
         List<History> list = historyRepository.getAllByUser(id);
         System.out.println(list);
         return list;
@@ -40,5 +39,14 @@ public class HistoryService {
 //            historyRepository.save(history);
 //        }
         historyRepository.save(history);
+    }
+
+    public List<History> findAll() {
+        return historyRepository.findAll();
+    }
+
+    public List<History> findAllByUserId(Long userId) {
+        return historyRepository.getAllByUserOrderByIdDesc(userId);
+//        return historyRepository.getAllByOrderByUser(userId);
     }
 }

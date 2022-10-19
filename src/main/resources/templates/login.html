@@ -1,4 +1,6 @@
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,7 +37,17 @@
         </p>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+        <p></p>
+        <p><a href="/">Go Back Home</a></p>
+        <p>Don't have an account? <a th:href="@{/user/registration}">Sign up</a></p>
     </form>
+<!--    <div id="create-account-wrap">-->
+<!--        <p><a href="/">Go Back Home</a></p>-->
+<!--        <p>Not a member? <a th:href="@{/user/registration}">Create Account</a></p>-->
+<!--        <p></p></div>-->
+
+
 </div>
 </body>
 </html>

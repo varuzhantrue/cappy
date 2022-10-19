@@ -33,10 +33,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()//by default is enabled
                 .authorizeRequests()
-                .antMatchers("/", "index", "/css/**", "/js/**", "/images/**")
-                .permitAll()
+//                .antMatchers("/", "index", "/css/**", "/js/**", "/images/**")
+//                .permitAll()
+                .antMatchers("/history", "/download/**", "/api/**")
 //                .antMatchers("/api/**").hasRole(ROLES.ADMIN.name())
-                .anyRequest()
+//                .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
@@ -57,7 +58,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID", "remember-me")
-                    .logoutSuccessUrl("/login")
+                    .logoutSuccessUrl("/")
                 .and()
                 .httpBasic();
         //              .httpBasic();//username & password is sent in each request//
@@ -76,29 +77,5 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(applicationUserService);
         return provider;
     }
-
-
-
-//    @Override
-//    @Bean
-//    protected UserDetailsService userDetailsService() {
-//        UserDetails TommyShellby = User.builder()
-//                .username("Tommy")
-//                .password(passwordEncoder.encode("peakyBlinders"))
-////                .roles(ROLES.ADMIN.name())
-//                .authorities(ROLES.ADMIN.getGrantedAuthorities())
-//                .build();
-//
-//        UserDetails ArthurShelby = User.builder()
-//                .username("Arthur")
-//                .password(passwordEncoder.encode("whiskeykiller"))
-////                .roles(ROLES.USER.name())
-//                .authorities(ROLES.USER.getGrantedAuthorities())
-//                .build();
-//        return new InMemoryUserDetailsManager(
-//                TommyShellby,
-//                ArthurShelby
-//        );
-//    }
 
 }

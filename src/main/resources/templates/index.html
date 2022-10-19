@@ -2,7 +2,7 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 >
 
 <head>
@@ -80,9 +80,9 @@
                                 <!--                              <li class="nav-item">-->
                                 <!--                                 <a class="nav-link" href="computer.html">Computer</a>-->
                                 <!--                              </li>-->
-                                <!--                              <li class="nav-item">-->
-                                <!--                                 <a class="nav-link" href="laptop.html">Laptop</a>-->
-                                <!--                              </li>-->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="history">History</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="product">Products</a>
                                 </li>
@@ -93,16 +93,28 @@
                                     <div class="search">
                                         <form action="search" method="get">
                                             <input class="form_sea" type="text" placeholder="Search" name="keyword">
-                                            <button type="submit" class="search_icon"><i class="fa fa-search"></i></button>
+                                            <button type="submit" class="search_icon"><i class="fa fa-search"></i>
+                                            </button>
                                         </form>
                                     </div>
                                 </div>
-                                <!--                              <li class="nav-item d_none">-->
-                                <!--                                 <a class="nav-link" href="/search"><i class="fa fa-search" aria-hidden="true"></i></a>-->
-                                <!--                              </li>-->
-                                <li class="nav-item d_none">
-                                    <a class="nav-link" href="login">Login</a>
+
+
+<!--                                <th:block sec:authorize="isAnonymous()">-->
+<!--                                    <li class="nav-item d_none">-->
+<!--                                        <a class="nav-link" href="login">Login</a>-->
+<!--                                    </li>-->
+<!--                                </th:block>-->
+
+                                <li sec:authorize="!isAuthenticated()" class="nav-item d_none">
+                                    <a class="nav-link" href="/login">Login</a>
                                 </li>
+
+                                <li sec:authorize="isAuthenticated()" class="nav-item d_none">
+<!--                                    <a class="nav-link" href="/logout">Logout</a>-->
+                                    <a class="nav-link" href="/logout">Logout</a>
+                                </li>
+
                             </ul>
                         </div>
                     </nav>
@@ -265,11 +277,6 @@
             <!---->
             <!--just for empty gap-->
             <div class="col-md-4">
-                <!--                  <div class="box_text">-->
-                <!--                     <i><img src="images/thr1.png" alt="#"/></i>-->
-                <!--                     <h3>Laptop</h3>-->
-                <!--                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>-->
-                <!--                  </div>-->
             </div>
             <!---->
             <div class="col-md-4">
@@ -322,7 +329,7 @@
     </div>
 </div>
 <!-- end products -->
-<!-- laptop  section -->
+<!-- Spotify  section -->
 <div class="laptop">
     <div class="container">
         <div class="row">
@@ -330,7 +337,7 @@
                 <div class="titlepage">
                     <p>Play millions of songs and podcasts.</p>
                     <h2>Ad-free music listening</h2>
-                    <a class="read_more" href="#">Get Spotify Free</a>
+                    <a class="read_more" href="productPage/95">Get Spotify Free</a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -342,7 +349,7 @@
     </div>
 </div>
 </div>
-<!-- end laptop  section -->
+<!-- end Spotify  section -->
 <!-- customer -->
 <div class="customer">
     <div class="container">
@@ -555,6 +562,7 @@
     pointer-events: none;
     color: #aaa;
 }
+
 
 </style>
 

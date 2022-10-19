@@ -1,39 +1,47 @@
 package com.capstone.cappy.service;
 
-import com.capstone.cappy.models.User;
+import com.capstone.cappy.entities.User;
+import com.capstone.cappy.entities.UserDto;
 import com.capstone.cappy.repositories.UserRepository;
-import net.bytebuddy.implementation.bytecode.Throw;
-import org.apache.tomcat.util.net.jsse.JSSEUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 @Service//component
 public class UserService {
-    //business logic
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> getUsers() {
         return userRepository.findAllByOrderByIdAsc();
     }
 
-    public void registerUser(User user) {
-        Optional<User> userOptional = userRepository
-                .findUserByEmail(user.getEmail());
-        if (userOptional.isPresent()) {
-            throw new IllegalStateException("e-mail is already registered");
-        } else {
-            userRepository.save(user);
-        }
+    public void registerUser(UserDto userDto) {
+        User user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRoleName(userDto.getRoleName());
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setNumber(userDto.getNumber());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate ld = LocalDate.parse(userDto.getDateOfBirth(), formatter);
+        user.setDateOfBirth(ld);
+
+        userRepository.save(user);
         System.out.println(user);
     }
 
@@ -86,17 +94,6 @@ public class UserService {
             user.setDateOfBirth(dateOfBirth);
         }
     }
-
-//        if (email != null
-//                && email.length() > 0
-//                && !email.equals(user.getEmail())) {
-//            Optional<User> optionalUser = userRepository.findUserByEmail(email);
-//            if (optionalUser.isPresent()) {
-//                throw new IllegalStateException("e-mail taken");
-//            }
-//            user.setEmail(email);
-//        }
-
 
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);

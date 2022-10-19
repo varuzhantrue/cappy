@@ -794,6 +794,34 @@ ul.btn li:last-child {
      border-bottom: #fff solid 1px;
 }
 
+/*----------------------search------------------------------------*/
+.search {
+     padding: 15px 0;
+     text-align: right;
+     margin-right:100px;
+     width : 300px;
+}
+
+.form_sea {
+     border-radius: 20px;
+     border: #fff solid 1px;
+     padding: 0px 15px;
+     color: #000;
+     height: 32px;
+     position: relative;
+     width: 100%;
+}
+
+.search_icon {
+     position: absolute;
+     margin-left: -20px;
+     margin-top: 6px;
+     z-index: 999;
+     background: transparent;
+     padding: 3px 0px 0px 0px;
+     color: #b7b7b7;
+}
+
 .main_form {
      padding: 70px 50px;
      border: #fff solid 2px;

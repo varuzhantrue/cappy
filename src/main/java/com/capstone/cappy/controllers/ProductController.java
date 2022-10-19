@@ -1,6 +1,6 @@
 package com.capstone.cappy.controllers;
 
-import com.capstone.cappy.models.Product;
+import com.capstone.cappy.entities.Product;
 import com.capstone.cappy.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +17,12 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/productPage")
-    public String page(Model model) {
-        Product product = productService.getProductById(106L);
-        model.addAttribute("product", product);
-        return "productPage";
-    }
+//    @GetMapping("/productPage")
+//    public String page(Model model) {
+//        Product product = productService.getProductById(106L);
+//        model.addAttribute("product", product);
+//        return "productPage";
+//    }
 
     @GetMapping("/product")
     public String product(Model model) {

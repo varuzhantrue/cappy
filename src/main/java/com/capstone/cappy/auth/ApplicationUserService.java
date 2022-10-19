@@ -1,6 +1,6 @@
 package com.capstone.cappy.auth;
 
-import com.capstone.cappy.models.User;
+import com.capstone.cappy.entities.User;
 import com.capstone.cappy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

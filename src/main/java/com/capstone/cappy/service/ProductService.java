@@ -1,6 +1,6 @@
 package com.capstone.cappy.service;
 
-import com.capstone.cappy.models.Product;
+import com.capstone.cappy.entities.Product;
 import com.capstone.cappy.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 

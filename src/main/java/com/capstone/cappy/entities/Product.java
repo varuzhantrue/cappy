@@ -1,4 +1,4 @@
-package com.capstone.cappy.models;
+package com.capstone.cappy.entities;
 
 import lombok.Getter;
 import lombok.Setter;

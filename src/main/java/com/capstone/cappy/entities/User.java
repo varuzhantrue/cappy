@@ -1,4 +1,4 @@
-package com.capstone.cappy.models;
+package com.capstone.cappy.entities;
 
 import com.capstone.cappy.enums.ROLES;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,7 +13,7 @@ import java.time.Period;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity//for hibernate
+@Entity//for hibernate -> it creates table in db
 @Table(name = "users")
 public class User {
     @Id
@@ -30,6 +30,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String number;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")//corrects the date format
     private LocalDate dateOfBirth;
     @Transient//no need to be "age" column in db coz it can be calculated real time
@@ -43,8 +44,7 @@ public class User {
                 String firstName,
                 String lastName,
                 String number,
-                LocalDate dateOfBirth,
-                History history) {
+                LocalDate dateOfBirth) {
         this.email = email;
         this.password = password;
         this.roleName = roleName;
@@ -54,6 +54,10 @@ public class User {
         this.lastName = lastName;
         this.number = number;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setTheDateOfBirth(String dateOfBirth) {
+
     }
 
     @Transient

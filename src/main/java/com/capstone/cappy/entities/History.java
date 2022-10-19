@@ -1,9 +1,9 @@
-package com.capstone.cappy.models;
+package com.capstone.cappy.entities;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -25,13 +25,25 @@ public class History {
     private long product;
 
     @Column(name = "download_date")
-    private Date downloadDate;
+//    private Date downloadDate;
+//    private SimpleDateFormat downloadDate;
+    private LocalDate downloadDate;
+//    private Calendar downloadDate;
+
+    @Column
+    private String productName;
 
     public History(long user_id,
                    long product_id,
-                   Date downloadDate) {
+//                   Date downloadDate,
+//                   SimpleDateFormat downloadDate,
+                   LocalDate downloadDate,
+                   String productName) {
+
         this.user = user_id;
         this.product = product_id;
         this.downloadDate = downloadDate;
+        this.productName = productName;
     }
+
 }
