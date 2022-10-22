@@ -72,5 +72,3 @@ It will take you about 30 hours to complete the task.
 Please be aware that this task is mandatory.
 
 You can earn a maximum of 300 points (100%) for this task. To complete the task successfully, you need to earn at least 70% of the points.
-
-After you are ready with your solution, add the mentor to your repository as a collaborator and paste a link to the repository in the field below. Enter any comments or questions related to your solution if it is necessary. After you submit your solution, please don't edit it.
