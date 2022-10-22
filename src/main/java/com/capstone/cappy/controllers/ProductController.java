@@ -17,13 +17,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-//    @GetMapping("/productPage")
-//    public String page(Model model) {
-//        Product product = productService.getProductById(106L);
-//        model.addAttribute("product", product);
-//        return "productPage";
-//    }
-
     @GetMapping("/product")
     public String product(Model model) {
         List<Product> productList = productService.findAll();

@@ -35,8 +35,8 @@ public class User {
     private LocalDate dateOfBirth;
     @Transient//no need to be "age" column in db coz it can be calculated real time
     private Integer age;
-    @Transient
-    private History history = new History();
+
+
 
     public User(String email,
                 String password,
@@ -70,9 +70,6 @@ public class User {
         this.age = age;
     }
 
-    public History getHistory() {
-        return history;
-    }
 
     @Transient
     public void setRole() {

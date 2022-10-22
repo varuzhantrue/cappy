@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.concurrent.TimeUnit;
@@ -31,7 +32,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()//by default is enabled
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                //postmani kam ayl 3rd koxmi hamar                        ^
+//                .csrf().disable()//by default is enabled
+                .and()
                 .authorizeRequests()
 //                .antMatchers("/", "index", "/css/**", "/js/**", "/images/**")
 //                .permitAll()
@@ -50,6 +54,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
                     .key("somethingSecured")
                     .rememberMeParameter("remember-me")
+                    .userDetailsService(applicationUserService)
                 .and()
                 .logout()
                     .logoutUrl("/logout")
@@ -77,5 +82,4 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(applicationUserService);
         return provider;
     }
-
 }

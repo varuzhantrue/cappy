@@ -18,7 +18,7 @@ public class History {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "user_id", unique = false)
+    @Column(name = "user_id")
     private long user;
 
     @Column(name = "product_id")

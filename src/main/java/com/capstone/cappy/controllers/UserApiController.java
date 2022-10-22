@@ -4,6 +4,8 @@ import com.capstone.cappy.entities.User;
 import com.capstone.cappy.entities.UserDto;
 import com.capstone.cappy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +30,12 @@ public class UserApiController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")//?
-    public void registerUser(@RequestBody UserDto user) {
-        userService.registerUser(user);
+    @PreAuthorize("hasRole('ROLE_ADMIN')")//?
+    public ResponseEntity<?> registerUser(@RequestBody UserDto user) {
+        if (userService.registerUser(user)) {
+            return new ResponseEntity<>("user successfully added", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("email already taken", HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping(path = "{userId}")
@@ -46,6 +51,7 @@ public class UserApiController {
             @RequestParam(required = false) String password,
             @RequestParam(required = false) String firstName,
             @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String roleName,
             @RequestParam(required = false) String number,
             @RequestParam(required = false) String dateOfBirth) {
 
@@ -54,6 +60,6 @@ public class UserApiController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             ld = LocalDate.parse(dateOfBirth, formatter);
         }
-        userService.updateUser(userId, password, firstName, lastName, number, ld);
+        userService.updateUser(userId, password, firstName, lastName, roleName, number, ld);
     }
 }

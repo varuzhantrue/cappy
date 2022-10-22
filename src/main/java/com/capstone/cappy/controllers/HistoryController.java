@@ -42,44 +42,21 @@ public class HistoryController {
 
     @GetMapping("/download/{productId}")
     public String downloadFIle(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long productId, HttpServletResponse response) throws IOException {
+
         if (userDetails == null) {
             return "redirect:/login";
         }
 
+        User user = userDetails.getUser();
         Product product = productService.getProductById(productId);
 
-        String apk_path = product.getApkPath();
-        apk_path = apk_path.replace('\\', '/');//coz windows is odd;)
-        System.out.println(apk_path);
-        File file = new File(apk_path);
-        response.setContentType("application/octet-stream");
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename = " + file.getName();
-        response.setHeader(headerKey, headerValue);
-        ServletOutputStream outputStream = response.getOutputStream();
-        BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-
-        byte[] buffer = new byte[250 * 1024 * 1024];//max apk size = 215mb
-        int bytesRead = -1;
-
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, bytesRead);
-        }
-        inputStream.close();
-        outputStream.close();
-
-        User user = userDetails.getUser();
-
+        productService.downloadProduct(product.getId(), response);
         History history = new History(
                 user.getId(),
-                product.getId(),
+                productId,
                 LocalDate.now(),
                 product.getName());
-
         historyService.save(history);
-
         return "redirect:/product";
     }
-
-
 }

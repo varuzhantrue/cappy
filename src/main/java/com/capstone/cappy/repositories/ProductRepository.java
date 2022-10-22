@@ -11,4 +11,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findTop6ByOrderById();
 
     List<Product> findAllByNameContainsIgnoreCase(String keyword);
+
 }

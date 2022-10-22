@@ -26,10 +26,15 @@ public class UserService {
 
     public List<User> getUsers() {
         return userRepository.findAllByOrderByIdAsc();
+//        users.forEach((user -> user.setRole()));
     }
 
-    public void registerUser(UserDto userDto) {
+    public boolean registerUser(UserDto userDto) {
         User user = new User();
+
+        if(userRepository.existsByEmail(userDto.getEmail())) {
+            return false;
+        }
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRoleName(userDto.getRoleName());
@@ -43,6 +48,7 @@ public class UserService {
 
         userRepository.save(user);
         System.out.println(user);
+        return true;
     }
 
     public void removeUser(Long userId) {
@@ -54,17 +60,24 @@ public class UserService {
         }
     }
 
-    @Transactional
+    @Transactional//is mandatory for Post, Put, Delete
     public void updateUser(Long userId,
                            String password,
                            String firstName,
                            String lastName,
+                           String roleName,
                            String number,
                            LocalDate dateOfBirth) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalStateException(
                         "no user matched with id: " + userId
                 ));
+
+        if (roleName != null && roleName.equals("ADMIN")) {
+            user.setRoleName("ADMIN");
+        } else {
+            user.setRoleName("USER");
+        }
 
         if (password != null
                 && password.length() > 0
